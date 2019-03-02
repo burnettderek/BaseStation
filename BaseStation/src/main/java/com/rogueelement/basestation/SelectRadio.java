@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.decibel.civilianc2.radios.BluetoothSerialComms;
 import com.decibel.civilianc2.radios.RSUV3;
 import com.decibel.civilianc2.tools.BlueToothManager;
-import com.rogueelement.rsuv3a.R;
+import com.rogueelement.basestation.R;
 
 import java.io.IOException;
 import java.io.InputStream;

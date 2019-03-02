@@ -28,7 +28,7 @@ import com.decibel.civilianc2.radios.Channel;
 import com.decibel.civilianc2.radios.ITransceiver;
 import com.decibel.civilianc2.radios.RadioDetection;
 import com.decibel.civilianc2.tools.BlueToothManager;
-import com.rogueelement.rsuv3a.R;
+import com.rogueelement.basestation.R;
 
 import java.io.IOException;
 import java.util.List;

@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="com.roguelement.rsuv3a.BaseStationApplication">
+        android:name="com.rogueelement.basestation.BaseStationApplication">
 
         <!--
         activity android:name="com.roguelement.rsuv3a.SelectRadio">
@@ -30,7 +30,7 @@
         </activity
         -->
         <activity
-            android:name="com.roguelement.rsuv3a.MainActivity"
+            android:name="com.rogueelement.basestation.MainActivity"
             android:screenOrientation="landscape"
             android:label="@string/title_activity_main">
             <intent-filter>
