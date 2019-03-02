@@ -1,3 +1,5 @@
+![Screenshot of the radio control UI](device-2019-03-02-134436.png)
+
 # BaseStation
 Base Station is an attempt to create a Android based user interface for common UHF/VHF radio boards such as the RS-UV3A, the DRA-818 series boards.
 
