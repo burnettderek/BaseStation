@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#AA000000"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.decibel.civilianc2.controls.StyledRadioButton
+                android:id="@+id/viewMapButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VIEW MAP" />
+
+            <com.decibel.civilianc2.controls.StyledRadioButton
+                android:id="@+id/drawCircleButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="  DRAW CIRCLE" />
+        </RadioGroup>
+
+        <com.decibel.civilianc2.controls.StyledTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:rotation="90"
+            android:text="ACTIONS"
+            android:textColor="@color/colorLight" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

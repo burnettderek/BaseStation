@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.decibel.civilianc2.controls.NumericTouchControl
+        android:id="@+id/numericTouchControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <com.decibel.civilianc2.controls.NumericTouchControl
+        android:id="@+id/numericTouchControl2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <com.decibel.civilianc2.controls.NumericTouchControl
+        android:id="@+id/numericTouchControl3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:text="."
+        android:textSize="60sp" />
+
+    <com.decibel.civilianc2.controls.NumericTouchControl
+        android:id="@+id/numericTouchControl4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <com.decibel.civilianc2.controls.NumericTouchControl
+        android:id="@+id/numericTouchControl5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <com.decibel.civilianc2.controls.NumericTouchControl
+        android:id="@+id/numericTouchControl6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+</LinearLayout>

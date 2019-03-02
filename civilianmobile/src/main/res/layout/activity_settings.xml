@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:drawableTop="@android:drawable/ic_menu_revert"
+                android:src="@android:drawable/ic_menu_revert" />
+
+            <com.decibel.civilianc2.controls.StyledTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:textColor="@color/colorLight"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <com.decibel.civilianc2.controls.StyledTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="CALLSIGN:"
+                android:textColor="@android:color/background_light" />
+
+            <com.decibel.civilianc2.controls.StyledEditText
+                android:id="@+id/callSignEdit"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/holo_blue_bright" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <com.decibel.civilianc2.controls.StyledTextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="SSID:"
+                android:textColor="@android:color/background_light" />
+
+            <Spinner
+                android:id="@+id/ssidSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="right"
+                android:popupBackground="@color/colorPrimary" />
+        </LinearLayout>
+
+        <com.decibel.civilianc2.controls.ViewBorder
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:tag="DarkGray">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.decibel.civilianc2.controls.StyledLabel
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="DogEar"
+                    android:text="MAP POSITION"
+                    android:textColor="#3F3F3F" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <com.decibel.civilianc2.controls.StyledLabel
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="LATITUDE"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="8sp" />
+
+                    <com.decibel.civilianc2.controls.StyledEditText
+                        android:id="@+id/latitudeEdit"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:ems="10"
+                        android:inputType="textPersonName|numberSigned|numberDecimal"
+                        android:textColor="@android:color/holo_blue_bright" />
+
+                    <com.decibel.civilianc2.controls.StyledLabel
+                        android:id="@+id/textView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="LONGITUDE"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="8sp" />
+
+                    <com.decibel.civilianc2.controls.StyledEditText
+                        android:id="@+id/logitudeEdit"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName|numberSigned|numberDecimal"
+                        android:textColor="@android:color/holo_blue_bright" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <com.decibel.civilianc2.controls.StyledTextView
+                        android:id="@+id/textView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="COMMENT:"
+                        android:textColor="@android:color/background_light" />
+
+                    <com.decibel.civilianc2.controls.StyledEditText
+                        android:id="@+id/commentEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textColor="@android:color/holo_blue_bright" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.decibel.civilianc2.controls.ViewBorder>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

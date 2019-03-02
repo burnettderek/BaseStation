@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.libcivilian">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.usb.host" />
+
+    <application>
+        <activity android:name="com.decibel.civilianc2.activities.ViewStations" />
+        <activity android:name="com.decibel.civilianc2.activities.ViewStation" />
+        <activity android:name="com.decibel.civilianc2.activities.ConfigureRadio" />
+        <!-- activity android:name="com.decibel.civilianc2.activities.ManageChannels" / -->
+        <activity android:name="com.decibel.civilianc2.activities.AddChannel" />
+        <!--activity android:name="com.decibel.civilianc2.activities.RadioControl" android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+
+            <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter" />
+        </activity-->
+
+    </application>
+
+</manifest>

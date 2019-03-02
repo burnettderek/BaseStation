@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    tools:context="com.decibel.civilianc2.activities.ViewStation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <com.decibel.civilianc2.controls.StyledTextView
+            android:id="@+id/txtCallsign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="STATION"
+            android:textColor="@color/colorLight"
+            android:textSize="32sp" />
+
+        <com.decibel.civilianc2.controls.StyledTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="AX25 MESSAGES"
+            android:textColor="@android:color/background_light" />
+
+        <ListView
+            android:id="@+id/listMessages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_configure_radio"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="com.decibel.civilianc2.activities.ConfigureRadio"
+    android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_revert" />
+
+            <com.decibel.civilianc2.controls.StyledTextView
+                android:id="@+id/RadioNameLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DRA818V"
+                android:textColor="@color/colorLight"
+                android:textSize="32sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.decibel.civilianc2.controls.ViewBorder
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:tag="darkgray">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:orientation="horizontal">
+
+                    <com.decibel.civilianc2.controls.StyledTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="1dp"
+                        android:background="#A9A9A9"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="4dp"
+                        android:text="STATUS"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="8sp" />
+
+                    <com.decibel.civilianc2.controls.StyledTextView
+                        android:id="@+id/txtConnectionStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="Not Connected"
+                        android:textColor="@color/colorLight" />
+
+                </LinearLayout>
+
+            </com.decibel.civilianc2.controls.ViewBorder>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="130dp"
+                android:orientation="vertical">
+
+                <com.decibel.civilianc2.controls.ViewBorder
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:tag="darkgray">
+
+                    <com.decibel.civilianc2.controls.StyledLabel
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="DogEar"
+                        android:text="TUNING"
+                        android:textColor="#ff444444" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="horizontal">
+
+                        <com.decibel.civilianc2.controls.StyledLabel
+                            android:id="@+id/rxLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="RX"
+                            android:textColor="@color/colorLight"
+                            android:textSize="12sp" />
+
+                        <com.decibel.civilianc2.controls.StyledEditText
+                            android:id="@+id/txtRxFreq"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="144.390"
+                            android:textColor="@android:color/holo_blue_bright"
+                            android:textSize="56sp" />
+
+                        <com.decibel.civilianc2.controls.StyledButton
+                            android:id="@+id/btnSetRxFreq"
+                            android:layout_width="30dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center"
+                            android:text="SET"
+                            android:textColor="@android:color/holo_blue_bright"
+                            android:textSize="12sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <com.decibel.civilianc2.controls.StyledLabel
+                                    android:id="@+id/textView3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:text="TX"
+                                    android:textColor="@android:color/holo_orange_light"
+                                    android:textSize="8sp" />
+
+                                <com.decibel.civilianc2.controls.StyledEditText
+                                    android:id="@+id/txtTxFreq"
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="top|center_vertical|fill_vertical"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:inputType="textPersonName"
+                                    android:text="145.000"
+                                    android:textColor="@android:color/holo_blue_bright"
+                                    android:textSize="12sp" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:background="#333333">
+
+                                    <com.decibel.civilianc2.controls.StyledButton
+                                        android:id="@+id/btnSetTxFeq"
+                                        android:layout_width="30dp"
+                                        android:layout_height="18dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_marginRight="2dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_weight="1"
+                                        android:text="SET"
+                                        android:textColor="@android:color/holo_blue_bright"
+                                        android:textSize="8sp" />
+                                </FrameLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_marginLeft="5dp"
+                                android:background="#333333"
+                                android:orientation="vertical">
+
+                                <com.decibel.civilianc2.controls.StyledButton
+                                    android:id="@+id/SetOffsetPlusButton"
+                                    android:layout_width="65dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="right"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="OFFSET +"
+                                    android:textColor="@android:color/holo_blue_bright"
+                                    android:textSize="8sp" />
+
+                                <com.decibel.civilianc2.controls.StyledButton
+                                    android:id="@+id/SetOffsetMinusButton"
+                                    android:layout_width="65dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="right"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:text="OFFSET -"
+                                    android:textColor="@android:color/holo_blue_bright"
+                                    android:textSize="8sp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.decibel.civilianc2.controls.ViewBorder>
+
+                <com.decibel.civilianc2.controls.StyledButton
+                    android:id="@+id/btnPTT"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TRANSMIT"
+                    android:textColor="@android:color/holo_blue_bright" />
+            </LinearLayout>
+
+
+            <com.decibel.civilianc2.controls.ViewBorder
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:tag="darkgrey">
+
+                <com.decibel.civilianc2.controls.StyledLabel
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="DogEar"
+                    android:text="CHANNELS"
+                    android:textColor="#ff444444" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <com.decibel.civilianc2.controls.StyledButton
+                            android:id="@+id/btnAddChannel"
+                            android:layout_width="match_parent"
+                            android:layout_height="12dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="ADD CHANNEL"
+                            android:textColor="@android:color/holo_blue_bright"
+                            android:textSize="8sp" />
+
+                        <com.decibel.civilianc2.controls.StyledButton
+                            android:id="@+id/btnEditChannel"
+                            android:layout_width="match_parent"
+                            android:layout_height="12dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="EDIT CHANNEL"
+                            android:textColor="@android:color/holo_blue_bright"
+                            android:textSize="8sp" />
+
+                        <com.decibel.civilianc2.controls.StyledButton
+                            android:id="@+id/btnDeleteChannel"
+                            android:layout_width="match_parent"
+                            android:layout_height="12dp"
+                            android:text="DELETE CHANNEL"
+                            android:textColor="@android:color/holo_blue_bright"
+                            android:textSize="8sp" />
+                    </LinearLayout>
+
+                    <Spinner
+                        android:id="@+id/listChannels"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+            </com.decibel.civilianc2.controls.ViewBorder>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+
+            <com.decibel.civilianc2.controls.StyledSeekBar
+                android:id="@+id/VolumeControl"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:foregroundTint="@android:color/holo_blue_bright"
+                android:tag="VOLUME" />
+
+            <com.decibel.civilianc2.controls.StyledSeekBar
+                android:id="@+id/SquelchControl"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:tag="SQUELCH" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.decibel.civilianc2.controls.ScannerView
+                android:id="@+id/scannerView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"></com.decibel.civilianc2.controls.ScannerView>
+
+            <com.decibel.civilianc2.controls.ViewBorder
+                android:id="@+id/radioLog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ScrollView
+                    android:id="@+id/radioCommScroller"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <com.decibel.civilianc2.controls.StyledTextView
+                            android:id="@+id/txtRadioComms"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollbars="vertical"
+                            android:textColor="@android:color/holo_blue_dark"
+                            android:textSize="8sp" />
+                    </LinearLayout>
+                </ScrollView>
+
+            </com.decibel.civilianc2.controls.ViewBorder>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.decibel.civilianc2.controls.ViewBorder
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="Gray">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.decibel.civilianc2.controls.StyledLabel
+                        android:id="@+id/textView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="DogEar"
+                        android:text="MAPPING"
+                        android:textColor="#ff888888" />
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Map and location based workflows."
+                        android:textColor="@android:color/background_light" />
+
+                    <com.decibel.civilianc2.controls.StyledButton
+                        android:id="@+id/btnMap"
+                        android:layout_width="60dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="right"
+                        android:layout_margin="5dp"
+                        android:text="GO"
+                        android:textColor="@android:color/holo_blue_bright"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
+            </com.decibel.civilianc2.controls.ViewBorder>
+
+            <com.decibel.civilianc2.controls.ViewBorder
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:tag="Grey">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.decibel.civilianc2.controls.StyledLabel
+                        android:id="@+id/textView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="DogEar"
+                        android:text="RADIO"
+                        android:textColor="#ff888888" />
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Set up your radio and add channels to the device."
+                        android:textColor="@android:color/background_light" />
+
+                    <com.decibel.civilianc2.controls.StyledButton
+                        android:id="@+id/btnConfigRadio"
+                        android:layout_width="60dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="right"
+                        android:layout_margin="5dp"
+                        android:text="GO"
+                        android:textColor="@android:color/holo_blue_bright"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </com.decibel.civilianc2.controls.ViewBorder>
+
+
+            <com.decibel.civilianc2.controls.ViewBorder
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:tag="Gray">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.decibel.civilianc2.controls.StyledLabel
+                        android:id="@+id/textView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="DogEar"
+                        android:text="SETTINGS"
+                        android:textColor="#ff888888" />
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Set your callsign, location and other device specific information."
+                        android:textColor="@android:color/background_light" />
+
+                    <com.decibel.civilianc2.controls.StyledButton
+                        android:id="@+id/btnSettings"
+                        android:layout_width="60dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="right"
+                        android:layout_margin="5dp"
+                        android:text="GO"
+                        android:textColor="@android:color/holo_blue_bright"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </com.decibel.civilianc2.controls.ViewBorder>
+
+            <com.decibel.civilianc2.controls.ViewBorder
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:tag="Gray">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.decibel.civilianc2.controls.StyledLabel
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="DogEar"
+                        android:text="STATIONS"
+                        android:textColor="#ff888888" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="A list of stations you've received messages from in digital modes."
+                        android:textColor="@android:color/background_light" />
+
+                    <com.decibel.civilianc2.controls.StyledButton
+                        android:id="@+id/btnViewStations"
+                        android:layout_width="60dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="right"
+                        android:layout_margin="5dp"
+                        android:text="GO"
+                        android:textColor="@android:color/holo_blue_bright"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </com.decibel.civilianc2.controls.ViewBorder>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
