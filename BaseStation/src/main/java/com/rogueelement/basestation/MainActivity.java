@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.decibel.civilianc2.fragments.ChannelFragment;
 import com.decibel.civilianc2.fragments.RadioControlFragment;
 import com.decibel.civilianc2.radios.Channel;
+import com.decibel.civilianc2.radios.IReceiver;
 import com.decibel.civilianc2.radios.ITransceiver;
 import com.decibel.civilianc2.radios.RadioDetection;
 import com.decibel.civilianc2.tools.BlueToothManager;
@@ -184,11 +185,11 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
             case SCAN:
                 try {
                     long current = System.currentTimeMillis();
-                    if(BaseStationApplication.getRadio().getSignalLevel() > 50)
+                    if(BaseStationApplication.getRadio().getSquelchState() == IReceiver.SquelchState.Open)
                         lastSignalDetectTime = System.currentTimeMillis();
                     long delta = current - lastSignalDetectTime;
                     if (delta > 10 * 1000) {
-                        BaseStationApplication.getRadio().setFrequency(item.getRxFreq(), item.getTxFreq());
+                        BaseStationApplication.getRadio().setReceiveFreq(item.getRxFreq());
                         if (item.getRxCTCSS() != null) {
                             BaseStationApplication.getRadio().enableToneSquelch(true);
                             BaseStationApplication.getRadio().setToneSquelch(item.getRxCTCSS());

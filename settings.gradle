@@ -1,1 +1,1 @@
-include ':app', ':civilianmobile', ':libcivilian', ':BaseStation'
+include ':libcivilian', ':BaseStation'

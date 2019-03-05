@@ -154,7 +154,22 @@ public class RSUV3 implements ITransceiver {
 
     @Override
     public boolean scan(int freq) {
-        return false;
+        try {
+            serialComms.send(SetReceiveFrequencyCommand + toFrequencyText(freq));
+            String response = serialComms.sendCommand(QuerySquelchState);
+            int squelchLevel = parseIntResponse(response);
+            return (squelchLevel == 1);
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public SquelchState getSquelchState() throws IOException{
+        String response = serialComms.sendCommand(QuerySquelchState);
+        int squelchLevel = parseIntResponse(response);
+        if(squelchLevel == 1)return SquelchState.Open;
+        else return SquelchState.Closed;
     }
 
     @Override
@@ -275,6 +290,7 @@ public class RSUV3 implements ITransceiver {
     private static final String QueryVolumeCommand              = "VU?";
     private static final String QuerySquelchCommand             = "SQ?";
     private static final String QuerySignalLevelCommand         = "SS";
+    private static final String QuerySquelchState               = "SO";
 
     private static final String SetSquelchRangeHigh             = "SR1";
     private static final String SetSquelchRangeLow              = "SR0";

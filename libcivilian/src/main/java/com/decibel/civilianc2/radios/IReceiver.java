@@ -14,12 +14,17 @@ public interface IReceiver {
         void onFrequencyChanged(int rx, int tx, int sql);
     }
 
+    enum SquelchState {
+        Open, Closed
+    }
+
     void setReceiveFreq(int receiveFreq) throws IOException;
     int getReceiveFreq();
     int getVolume();
     void setVolume(int v) throws IOException;
     void setSquelch(int s) throws IOException;
     int getSquelch();
+    SquelchState getSquelchState() throws IOException;
     int getSignalLevel();
     boolean scan(int freq) throws IOException;
 

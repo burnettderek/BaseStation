@@ -59,6 +59,11 @@ public class DRA818 implements ITransceiver{
     }
 
     @Override
+    public SquelchState getSquelchState() throws IOException {
+        return null;
+    }
+
+    @Override
     public int getSignalLevel() {
         return 0;
     }

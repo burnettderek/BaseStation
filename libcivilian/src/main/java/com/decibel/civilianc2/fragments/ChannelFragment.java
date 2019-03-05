@@ -201,7 +201,7 @@ public class ChannelFragment extends Fragment implements ChannelManager.EventLis
                 });
 
             }
-        }, delay, 1000);
+        }, delay, ScanPauseTimeInMillis);
     }
 
 
@@ -236,4 +236,5 @@ public class ChannelFragment extends Fragment implements ChannelManager.EventLis
     private int scanChannelIndex = 0;
     private Handler handler = new Handler();
     private Channel lastScannedChannel = null;
+    private long ScanPauseTimeInMillis = 1000;
 }

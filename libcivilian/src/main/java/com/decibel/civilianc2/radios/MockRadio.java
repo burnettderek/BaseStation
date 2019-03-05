@@ -87,6 +87,11 @@ public class MockRadio implements ITransceiver{
     }
 
     @Override
+    public SquelchState getSquelchState() throws IOException {
+        return SquelchState.Closed;
+    }
+
+    @Override
     public int getSignalLevel() {
         return 50;
     }
