@@ -180,25 +180,27 @@ public class ChannelFragment extends Fragment implements ChannelManager.EventLis
         this.scanTimer.schedule(new TimerTask(){
             @Override
             public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(mListener != null){
-                            Channel nextChannel = items.get(scanChannelIndex);
-                            if(SUCCESS == mListener.onListFragmentInteraction(nextChannel, OnListFragmentInteractionListener.Action.SCAN)) {
-                                lastScannedChannel = nextChannel;
-                                channelCallSign.setText(nextChannel.getName());
-                                scanChannelIndex++;
-                                if (scanChannelIndex == items.size()) scanChannelIndex = 0;
-                            } else {
-                                int index = scanChannelIndex > 0 ? scanChannelIndex - 1 : items.size() - 1;
-                                Channel currentChannel = items.get(index);
-                                channelCallSign.setText(currentChannel.getName() + " (signal detected)");
-                                Log.d("Channel Scanner", "Holding on station '" + currentChannel.getName() + "'. Signal Detected.");
-                            }
-                        }
+                if(mListener != null){
+                    Channel nextChannel = items.get(scanChannelIndex);
+                    if(SUCCESS == mListener.onListFragmentInteraction(nextChannel, OnListFragmentInteractionListener.Action.SCAN)) {
+                        lastScannedChannel = nextChannel;
+                        scanDialogLabel = nextChannel.getName();
+                        scanChannelIndex++;
+                        if (scanChannelIndex == items.size()) scanChannelIndex = 0;
+                    } else {
+                        int index = scanChannelIndex > 0 ? scanChannelIndex - 1 : items.size() - 1;
+                        Channel currentChannel = items.get(index);
+                        scanDialogLabel = currentChannel.getName() + " (signal detected)";
+                        Log.d("Channel Scanner", "Holding on station '" + currentChannel.getName() + "'. Signal Detected.");
                     }
-                });
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            channelCallSign.setText(scanDialogLabel);
+                        }
+                    });
+                }
+
 
             }
         }, delay, ScanPauseTimeInMillis);
@@ -236,5 +238,6 @@ public class ChannelFragment extends Fragment implements ChannelManager.EventLis
     private int scanChannelIndex = 0;
     private Handler handler = new Handler();
     private Channel lastScannedChannel = null;
-    private long ScanPauseTimeInMillis = 1000;
+    private long ScanPauseTimeInMillis = 500;
+    private String scanDialogLabel = new String();
 }

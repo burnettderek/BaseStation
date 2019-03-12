@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -151,6 +152,13 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
     @Override
     public void onTabSelected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
         mViewPager.setCurrentItem(tab.getPosition());
+        if(tab.getPosition() == TAB_RADIO_CONTROL){
+            if(this.controlFragment != null)
+                this.controlFragment.checkConnectionStatus();
+        } else {
+            if(this.controlFragment != null)
+                this.controlFragment.stopConnectionStatus();
+        }
     }
 
     @Override
@@ -164,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
     }
 
     @Override
-    public Result onListFragmentInteraction(Channel item, ChannelFragment.OnListFragmentInteractionListener.Action action) {
+    public Result onListFragmentInteraction(final Channel item, ChannelFragment.OnListFragmentInteractionListener.Action action) {
         switch (action){
             case TUNE:
                 try {
@@ -175,8 +183,14 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
                     } else {
                         BaseStationApplication.getRadio().enableToneSquelch(false);
                     }
-                    controlFragment.setRadio(BaseStationApplication.getRadio());
-                    Toast.makeText(getApplicationContext(), "Tuned to channel " + item.getName() + ".", Toast.LENGTH_LONG).show();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            controlFragment.setRadio(BaseStationApplication.getRadio());
+                            Toast.makeText(getApplicationContext(), "Tuned to channel " + item.getName() + ".", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
                     return Result.SUCCESS;
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -261,12 +275,12 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            if(position == 0){
+            if(position == TAB_RADIO_CONTROL){
                 controlFragment = new RadioControlFragment();
                 controlFragment.setChannelManager(BaseStationApplication.getChannels());
                 return controlFragment;
             }
-            if(position == 1) {
+            if(position == TAB_CHANNELS) {
                  currentChannelFragment = ChannelFragment.newInstance(0);
                 currentChannelFragment.setChannels(BaseStationApplication.getChannels());
                 return currentChannelFragment;
@@ -278,17 +292,17 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
-                case 0:
+                case TAB_RADIO_CONTROL:
                     return "RADIO";
-                case 1:
+                case TAB_CHANNELS:
                     return "CHANNELS";
-                case 2:
+                case TAB_TEXT_MESSAGES:
                     return "TEXTS";
             }
             return null;
@@ -297,4 +311,9 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
 
     private RadioControlFragment controlFragment;
     private long lastSignalDetectTime = 0;
+    private Handler handler = new Handler();
+
+    private static final int TAB_RADIO_CONTROL = 0;
+    private static final int TAB_CHANNELS = 1;
+    private static final int TAB_TEXT_MESSAGES = 2;
 }

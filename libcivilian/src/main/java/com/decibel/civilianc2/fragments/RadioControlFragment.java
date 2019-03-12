@@ -235,10 +235,14 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
         }
     }
 
-    private void checkConnectionStatus() {
-        Timer timer = new Timer();
+    public void checkConnectionStatus() {
+        if(connectionTimer != null){
+            connectionTimer.cancel();
+            connectionTimer = null;
+        }
+        connectionTimer = new Timer();
         final ISerialCommsListener that = this;
-        timer.schedule(new TimerTask() {
+        connectionTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 handler.post(new Runnable() {
@@ -252,6 +256,7 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
                         }
                         lblRadioStatus.setText(radioConnectedLastCheck ? "CONNECTED" : "DISCONNECTED");
                         int signal = ((int)(tranceiver.getTransceiver().getSignalLevel()) / 10) * 10;
+                        if(signal < 0)signal = 0;
                         int drawableResourceId = getResources().getIdentifier("signal_" + signal, "drawable", context.getPackageName());
                         signalLevel.setImageResource(drawableResourceId);
 
@@ -259,6 +264,13 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
                 });
             }
         }, 5000, 2000);
+    }
+
+    public void stopConnectionStatus(){
+        if(connectionTimer != null){
+            connectionTimer.cancel();
+            connectionTimer = null;
+        }
     }
 
     private void onDisconnect(){
@@ -395,4 +407,5 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
     private Handler handler = new Handler();
     private boolean radioConnectedLastCheck = false;
     private ChannelManager channelManager;
+    private Timer connectionTimer;
 }
