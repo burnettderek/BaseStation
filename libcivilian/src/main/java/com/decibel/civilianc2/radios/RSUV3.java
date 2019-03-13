@@ -167,6 +167,7 @@ public class RSUV3 implements ITransceiver {
     @Override
     public SquelchState getSquelchState() throws IOException{
         String response = serialComms.sendCommand(QuerySquelchState);
+        if(response == null)throw new IOException("Bad response from radio");
         int squelchLevel = parseIntResponse(response);
         if(squelchLevel == 1)return SquelchState.Open;
         else return SquelchState.Closed;
