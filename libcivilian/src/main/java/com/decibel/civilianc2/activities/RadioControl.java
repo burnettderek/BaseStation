@@ -129,14 +129,14 @@ public class RadioControl extends AppCompatActivity implements EditFrequencyView
                         lblBand.setText(tranceiver.getBandString());
                         volumeControl.setValue(tranceiver.getTransceiver().getVolume());
                         squelchControl.setValue(tranceiver.getTransceiver().getSquelch());
-                        if (tranceiver.getTransceiver().getToneSquelchEnabled())
+                        if (tranceiver.getTransceiver().getToneSquelchFrequency() != null)
                             that.ctcssControl.setValue(tranceiver.getTransceiver().getToneSquelchFrequency() / 100.0);
                         if (tranceiver.getOffset() == RadioController.Offset.Plus) {
                             that.btnOffsetPlus.setChecked(true);
                         } else if (tranceiver.getOffset() == RadioController.Offset.Minus) {
                             that.btnOffsetMinus.setChecked(true);
                         }
-                        that.ctcssEnable.setChecked(that.tranceiver.getTransceiver().getToneSquelchEnabled());
+                        that.ctcssEnable.setChecked(that.tranceiver.getTransceiver().getToneSquelchFrequency() != null);
                     }
                     catch (Exception e){
                         onDisconnect();
@@ -150,7 +150,7 @@ public class RadioControl extends AppCompatActivity implements EditFrequencyView
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 try {
-                    tranceiver.getTransceiver().enableToneSquelch(isChecked);
+                    tranceiver.incrementCtcss(true);
                 } catch (IOException e) {
                     onDisconnect();
                 }

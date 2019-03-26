@@ -21,8 +21,7 @@ import java.util.Scanner;
 
 public class RSUV3 implements ITransceiver {
 
-    public RSUV3(Context context){
-        this.context = context;
+    public RSUV3(){
     }
 
     @Override
@@ -42,13 +41,27 @@ public class RSUV3 implements ITransceiver {
 
     @Override
     public void setFrequency(int rx, int tx) throws IOException {
-        serialComms.send(SetTransmitFrequencyCommand + toFrequencyText(tx));
-        try {
+        if(rx == tx){
+            serialComms.send(SetFrequencySimplexCommand + toFrequencyText(rx));
+        } else if(tx < rx) {
+            serialComms.send(SetFrequencyNegOffsetCommand + toFrequencyText(rx));
+        } else {
+            serialComms.send(SetFreqencyPosOffsetCommand + toFrequencyText(rx));
+        }
+
+        /*try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        serialComms.send(SetReceiveFrequencyCommand + toFrequencyText(rx));
+        String result = serialComms.sendCommand("F?");
+        if(result == null || result == "")throw new IOException("Could not verify frequency.");
+        String[] rxAndTx = result.split(" TX:");
+
+        int rxResult = parseIntResponse(rxAndTx[0]);
+        int txResult = parseIntResponse(rxAndTx[1]);
+        if(rxResult != rx || txResult != tx)throw new IOException("Failed to set frequency!");*/
+
         rxFrequency = rx;
         txFrequency = tx;
         for(IEventListener listener : listeners){
@@ -67,28 +80,30 @@ public class RSUV3 implements ITransceiver {
 
 
     @Override
-    public void setToneSquelch(int frequency) throws IOException{
-        serialComms.send(SetCTCSSToneCommand + frequency);
-        this.ctcssFrequency = frequency;
+    public void setToneSquelch(Integer frequency) throws IOException{
+        try {
+            if((frequency == null && ctcssFrequency != null) || (frequency != null && ctcssFrequency == null))//do we need to toggle CTCSS on/off?
+                serialComms.send(SetCTCSSMode + (frequency != null ? "1" : "0"));
+            this.ctcssFrequency = frequency;
+            if(frequency == null) return;
+            String freqString = frequency >= 10000 ? "" + frequency : "0" + frequency;
+            serialComms.send(SetCTCSSToneCommand + freqString);
+            //serialComms.send(SetCTCSSToneCommand + freqString);//note, this second blast
+            //String result = serialComms.sendCommand(SetCTCSSToneCommand + "?");
+            //int currentTone = parseIntResponse(result);
+            //if (currentTone != frequency) throw new IOException("Failed to set the CTCSS phone.");
+            this.ctcssFrequency = frequency;
+        } catch (Exception e){
+            throw new IOException(e);
+        }
     }
 
-    @Override
-    public void enableToneSquelch(boolean enable) throws IOException{
-        serialComms.send(SetCTCSSMode + (enable ? "1" : "0"));
-        this.ctcssEnabled = enable;
-    }
+
 
     @Override
-    public int getToneSquelchFrequency() {
+    public Integer getToneSquelchFrequency() {
         return ctcssFrequency;
     }
-
-    @Override
-    public boolean getToneSquelchEnabled() {
-        return ctcssEnabled;
-    }
-
-
 
     @Override
     public ISoftwareTransmitter getSoftwareTransmitter(){
@@ -111,7 +126,7 @@ public class RSUV3 implements ITransceiver {
 
     @Override
     public String getName() {
-        return "RS-UV3A";
+        return "RS-UV3A: " + this.currentFirmware;
     }
 
 
@@ -166,11 +181,15 @@ public class RSUV3 implements ITransceiver {
 
     @Override
     public SquelchState getSquelchState() throws IOException{
-        String response = serialComms.sendCommand(QuerySquelchState);
-        if(response == null)throw new IOException("Bad response from radio");
-        int squelchLevel = parseIntResponse(response);
-        if(squelchLevel == 1)return SquelchState.Open;
-        else return SquelchState.Closed;
+        try {
+            String response = serialComms.sendCommand(QuerySquelchState);
+            if (response == null) throw new IOException("Bad response from radio");
+            int squelchLevel = parseIntResponse(response);
+            if (squelchLevel == 1) return SquelchState.Open;
+            else return SquelchState.Closed;
+        } catch (Exception e) {
+            throw new IOException(e);
+        }
     }
 
     @Override
@@ -183,15 +202,9 @@ public class RSUV3 implements ITransceiver {
         return true;
     }
 
-
-    public static UsbDevice getUsbDevice(UsbManager manager){
-        Map<String, UsbDevice> connectedDevices = manager.getDeviceList();
-        for (UsbDevice device : connectedDevices.values()) {
-            if (device.getVendorId() == VendorID && device.getProductId() == ProductID) {
-                return device;
-            }
-        }
-        return null;
+    @Override
+    public ISerialComms getSerialComms(){
+        return this.serialComms;
     }
 
 
@@ -244,13 +257,11 @@ public class RSUV3 implements ITransceiver {
         return (int)((celsius * 9.0/5.0) + 32.0);
     }
 
-    private Context context;
     private ISerialComms serialComms;
-    //UsbSerialDevice serial;
     private Object messageWaiter = new Object();
     private int rxFrequency;
     private int txFrequency;
-    private int ctcssFrequency;
+    private Integer ctcssFrequency;
     private int volumeLevel;
     private int squelchLevel;
     private boolean ctcssEnabled = false;
@@ -277,6 +288,9 @@ public class RSUV3 implements ITransceiver {
     private static final String SetCourtesyBeepMode             = "CB";
 
 
+    private static final String SetFrequencySimplexCommand      = "FS";
+    private static final String SetFrequencyNegOffsetCommand    = "FD";
+    private static final String SetFreqencyPosOffsetCommand     = "FU";
     private static final String SetTransmitFrequencyCommand     = "FT";
     private static final String SetReceiveFrequencyCommand      = "FR";
     private static final String SetVolumeLevelCommand           = "VU";

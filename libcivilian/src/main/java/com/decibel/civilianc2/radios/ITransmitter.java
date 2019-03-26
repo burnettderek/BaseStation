@@ -9,10 +9,8 @@ import java.io.IOException;
 public interface ITransmitter {
     int getTransmitFreq();
     void setTransmitFreq(int transmitFreq) throws IOException;
-    void setToneSquelch(int frequency) throws IOException;
-    void enableToneSquelch(boolean enable) throws IOException;
-    int getToneSquelchFrequency();
-    boolean getToneSquelchEnabled();
+    void setToneSquelch(Integer frequency) throws IOException;
+    Integer getToneSquelchFrequency();
 
     ISoftwareTransmitter getSoftwareTransmitter();
 }

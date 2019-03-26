@@ -24,7 +24,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.decibel.civilianc2.fragments.ChannelFragment;
+import com.decibel.civilianc2.fragments.ContactFragment;
 import com.decibel.civilianc2.fragments.RadioControlFragment;
+import com.decibel.civilianc2.fragments.dummy.DummyContent;
 import com.decibel.civilianc2.radios.Channel;
 import com.decibel.civilianc2.radios.IReceiver;
 import com.decibel.civilianc2.radios.ITransceiver;
@@ -35,7 +37,7 @@ import com.rogueelement.basestation.R;
 import java.io.IOException;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements TabListener, ChannelFragment.OnListFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements TabListener, ChannelFragment.OnListFragmentInteractionListener, ContactFragment.OnContactFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -176,13 +178,8 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
         switch (action){
             case TUNE:
                 try {
+                    BaseStationApplication.getRadio().setToneSquelch(item.getRxCTCSS());
                     BaseStationApplication.getRadio().setFrequency(item.getRxFreq(), item.getTxFreq());
-                    if(item.getRxCTCSS() != null) {
-                        BaseStationApplication.getRadio().enableToneSquelch(true);
-                        BaseStationApplication.getRadio().setToneSquelch(item.getRxCTCSS());
-                    } else {
-                        BaseStationApplication.getRadio().enableToneSquelch(false);
-                    }
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -193,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
 
                     return Result.SUCCESS;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage() + ".", Toast.LENGTH_LONG).show();
                 }
                 break;
             case SCAN:
@@ -204,13 +201,6 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
                     long delta = current - lastSignalDetectTime;
                     if (delta > 10 * 1000) {
                         BaseStationApplication.getRadio().setReceiveFreq(item.getRxFreq());
-                        if (item.getRxCTCSS() != null) {
-                            BaseStationApplication.getRadio().enableToneSquelch(true);
-                            BaseStationApplication.getRadio().setToneSquelch(item.getRxCTCSS());
-                        } else {
-                            BaseStationApplication.getRadio().enableToneSquelch(false);
-                        }
-                        //controlFragment.setRadio(BaseStationApplication.getRadio());
                         return Result.SUCCESS;
                     }
                 } catch(IOException e){
@@ -223,6 +213,11 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
                 return Result.SUCCESS;
         }
         return Result.FAILURE;
+    }
+
+    @Override
+    public void onContactFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 
 
@@ -280,10 +275,14 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
                 controlFragment.setChannelManager(BaseStationApplication.getChannels());
                 return controlFragment;
             }
-            if(position == TAB_CHANNELS) {
+            else if(position == TAB_CHANNELS) {
                  currentChannelFragment = ChannelFragment.newInstance(0);
                 currentChannelFragment.setChannels(BaseStationApplication.getChannels());
                 return currentChannelFragment;
+            }
+            else if(position == TAB_TEXT_MESSAGES){
+                contactFragment = ContactFragment.newInstance(0);
+                return contactFragment;
             }
             else
                 return PlaceholderFragment.newInstance(position + 1);
@@ -310,6 +309,7 @@ public class MainActivity extends AppCompatActivity implements TabListener, Chan
     }
 
     private RadioControlFragment controlFragment;
+    private ContactFragment contactFragment;
     private long lastSignalDetectTime = 0;
     private Handler handler = new Handler();
 

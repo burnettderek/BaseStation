@@ -37,6 +37,8 @@ import com.decibel.civilianc2.tools.BlueToothManager;
 import com.example.libcivilian.R;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -159,11 +161,16 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 try {
-                    tranceiver.getTransceiver().enableToneSquelch(isChecked);
-                    if(!isChecked){
+                    if(!isChecked) {
+
                         ctcssControl.setValue(' ');
-                    } else {
+                        if(!updatingInterfaceProgrammatically)
+                            tranceiver.getTransceiver().setToneSquelch(null);
+                    }
+                    else {
                         ctcssControl.setValue(tranceiver.getTransceiver().getToneSquelchFrequency()/100.0);
+                        if(!updatingInterfaceProgrammatically)
+                            tranceiver.incrementCtcss(true);
                     }
                 } catch (Exception e) {
                     onDisconnect();
@@ -202,8 +209,9 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
     }
 
     public void setRadio(ITransceiver transceiver){
-
+        updatingInterfaceProgrammatically = true;
         try {
+            transceiver.getSerialComms().setListener(this);
             radioConnectedLastCheck = true;
             //setTitle(radio.getName());
             tranceiver = new RadioController(transceiver);
@@ -217,7 +225,7 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
             lblBand.setText(tranceiver.getBandString());
             volumeControl.setValue(tranceiver.getTransceiver().getVolume());
             squelchControl.setValue(tranceiver.getTransceiver().getSquelch());
-            if (tranceiver.getTransceiver().getToneSquelchEnabled())
+            if (tranceiver.getTransceiver().getToneSquelchFrequency() != null)
                 ctcssControl.setValue(tranceiver.getTransceiver().getToneSquelchFrequency() / 100.0);
             else
                 ctcssControl.setEnabled(false);
@@ -228,10 +236,12 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
             } else {
                 btnOffsetOff.setChecked(true);
             }
-            ctcssEnable.setChecked(tranceiver.getTransceiver().getToneSquelchEnabled());
+            ctcssEnable.setChecked(tranceiver.getTransceiver().getToneSquelchFrequency() != null);
             checkConnectionStatus();
         } catch (Exception e) {
             onDisconnect();
+        } finally {
+            updatingInterfaceProgrammatically = false;
         }
     }
 
@@ -248,7 +258,7 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        try{
+                        /*try{
                             tranceiver.getTransceiver().isConnected();
                             radioConnectedLastCheck = true;
                         } catch (IOException e) {
@@ -258,7 +268,7 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
                         int signal = ((int)(tranceiver.getTransceiver().getSignalLevel()) / 10) * 10;
                         if(signal < 0)signal = 0;
                         int drawableResourceId = getResources().getIdentifier("signal_" + signal, "drawable", context.getPackageName());
-                        signalLevel.setImageResource(drawableResourceId);
+                        signalLevel.setImageResource(drawableResourceId);*/
 
                     }
                 });
@@ -297,7 +307,7 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
                 dialog.dismiss();
                 String m_Text = input.getText().toString();
                 ITransceiver radio = tranceiver.getTransceiver();
-                Integer toneSquelch = (radio.getToneSquelchEnabled() ? radio.getToneSquelchFrequency() : null);
+                Integer toneSquelch = radio.getToneSquelchFrequency();
                 if(channelManager.addChannel(new Channel(m_Text, null, radio.getTransmitFreq(), radio.getReceiveFreq(), toneSquelch, toneSquelch))){
                     Toast.makeText(context, "Added " + m_Text + " to your channels list.", Toast.LENGTH_LONG).show();
                 } else {
@@ -336,9 +346,18 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
             @Override
             public void run() {
                 if(transmitted)
-                    txtComms.append("[TX]" + message + "\n");
+                    currentDisplayedText.add("[TX]" + message + "\n");
                 else
-                    txtComms.append("[RX]" + message + "\n");
+                    currentDisplayedText.add("[RX]" + message + "\n");
+
+                if(currentDisplayedText.size() > 20)
+                    currentDisplayedText.remove(0);
+
+                StringBuilder builder = new StringBuilder();
+                for(String line : currentDisplayedText){
+                    builder.append(line);
+                }
+                txtComms.setText(builder.toString());
                 commsScroller.smoothScrollTo(0, txtComms.getBottom() + 500);
             }
         });
@@ -358,12 +377,14 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         try {
-            if (buttonView == this.btnOffsetPlus && isChecked == true) {
-                tranceiver.setOffset(RadioController.Offset.Plus);
-            } else if (buttonView == btnOffsetOff && isChecked == true) {
-                tranceiver.setOffset(RadioController.Offset.Off);
-            } else if (buttonView == btnOffsetMinus && isChecked == true) {
-                tranceiver.setOffset(RadioController.Offset.Minus);
+            if(!updatingInterfaceProgrammatically) {
+                if (buttonView == this.btnOffsetPlus && isChecked == true) {
+                    tranceiver.setOffset(RadioController.Offset.Plus);
+                } else if (buttonView == btnOffsetOff && isChecked == true) {
+                    tranceiver.setOffset(RadioController.Offset.Off);
+                } else if (buttonView == btnOffsetMinus && isChecked == true) {
+                    tranceiver.setOffset(RadioController.Offset.Minus);
+                }
             }
         }catch (Exception e){
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -408,4 +429,6 @@ public class RadioControlFragment extends Fragment implements EditFrequencyView.
     private boolean radioConnectedLastCheck = false;
     private ChannelManager channelManager;
     private Timer connectionTimer;
+    private boolean updatingInterfaceProgrammatically = false;
+    private List<String> currentDisplayedText = new LinkedList<>();
 }

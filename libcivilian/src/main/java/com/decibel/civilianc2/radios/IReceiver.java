@@ -30,6 +30,8 @@ public interface IReceiver {
 
     boolean isConnected() throws IOException;
 
+    ISerialComms getSerialComms();
+
     void addEventListener(IEventListener listener);
     void removeEventListener(IEventListener listener);
 }

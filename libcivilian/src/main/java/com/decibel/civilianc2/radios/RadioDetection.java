@@ -59,7 +59,7 @@ public class RadioDetection {
                 socket.connect();
                 BluetoothSerialComms serialComms = new BluetoothSerialComms(socket);
                 serialComms.setListener(serialCommsListener);
-                RSUV3 radio = new RSUV3(context);
+                RSUV3 radio = new RSUV3();
                 radio.startSerialConnection(serialComms);
                 results.add(radio);
             } catch (IOException e){
@@ -75,7 +75,7 @@ public class RadioDetection {
         if(usbDevice != null){
             UsbSerialComms usbConnection = startSerialConnection(usbManager, usbDevice);
             if(usbConnection != null) {
-                RSUV3 radio = new RSUV3(context);
+                RSUV3 radio = new RSUV3();
                 usbConnection.setListener(commsListener);
                 try {
                     radio.startSerialConnection(usbConnection);

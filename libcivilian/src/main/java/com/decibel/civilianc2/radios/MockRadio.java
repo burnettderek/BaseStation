@@ -20,7 +20,7 @@ public class MockRadio implements ITransceiver{
     }
 
     @Override
-    public void setToneSquelch(int frequency) {
+    public void setToneSquelch(Integer frequency) {
         this.frequencyCtcss = frequency;
         for(IEventListener listener : listeners){
             //listener.onRadioInterfaceComms(String.format("CTCSS @ %.1f", + frequency/100.0), true);
@@ -28,23 +28,9 @@ public class MockRadio implements ITransceiver{
     }
 
     @Override
-    public void enableToneSquelch(boolean enable) {
-        this.enableCtcss = enable;
-        for(IEventListener listener : listeners){
-            //listener.onRadioInterfaceComms(enable ? "Enabling CTCSS" : "Disabling CTCSS", true);
-        }
-    }
-
-    @Override
-    public int getToneSquelchFrequency() {
+    public Integer getToneSquelchFrequency() {
         return this.frequencyCtcss;
     }
-
-    @Override
-    public boolean getToneSquelchEnabled() {
-        return enableCtcss;
-    }
-
 
     @Override
     public String getName() {
@@ -130,6 +116,12 @@ public class MockRadio implements ITransceiver{
             //listener.onRadioInterfaceComms("Frequency changed to RX-" + rx + " TX-" + tx, true);
         }
     }
+
+    @Override
+    public ISerialComms getSerialComms(){
+        return null;
+    }
+
 
     private int frequencyRx = 145620;
     private int frequencyTx = 145620 - 600;

@@ -53,6 +53,11 @@ public class BluetoothSerialComms implements ISerialComms {
     @Override
     public void send(String message) throws IOException {
         synchronized (sendLock) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             out.write((message + Delimiter).getBytes());
         }
         if(listener != null)

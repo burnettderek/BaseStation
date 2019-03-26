@@ -99,27 +99,22 @@ public class DRA818 implements ITransceiver{
     }
 
     @Override
-    public void setToneSquelch(int frequency) throws IOException {
+    public void setToneSquelch(Integer frequency) throws IOException {
 
     }
 
     @Override
-    public void enableToneSquelch(boolean enable) throws IOException {
-
-    }
-
-    @Override
-    public int getToneSquelchFrequency() {
+    public Integer getToneSquelchFrequency() {
         return this.ctcssFrequency;
     }
 
     @Override
-    public boolean getToneSquelchEnabled() {
-        return this.ctcssEnabled;
+    public ISoftwareTransmitter getSoftwareTransmitter(){
+        return null;
     }
 
     @Override
-    public ISoftwareTransmitter getSoftwareTransmitter(){
+    public ISerialComms getSerialComms(){
         return null;
     }
 

@@ -40,7 +40,7 @@ public class ConfigureRadio extends Activity implements AdapterView.OnItemSelect
         setContentView(R.layout.activity_configure_radio);
         //String driver = getIntent().getStringExtra("radio.driver");
 
-        radio = new RSUV3(this.getApplicationContext());
+        radio = new RSUV3();
 
         btnSetTxFreq = findViewById(R.id.btnSetTxFeq);
         btnSetRxFreq = findViewById(R.id.btnSetRxFreq);
